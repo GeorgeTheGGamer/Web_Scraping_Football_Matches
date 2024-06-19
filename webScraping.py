@@ -80,10 +80,33 @@ matches = pd.read_html(data.text, match="Scores & Fixtures")
 #print(matches)
 #currently as a list
 
-print(matches[0])
+matches[0]
 #this formats well as a pandas dataframe 
+#now installed lxml so now this should work 
+#and it does 
 
+#get match shooting stats with requests and pandas
+#Find the url of the shooting page 
+#find all the links and keep the one that has shooting in it 
+#once again utilise beautifulsoup
 
+soup = BeautifulSoup(data.text)
+links = soup.find_all('a')
+links = [l.get("href") for l in links]
+links = [l for l in links if l and 'all_comps/shooting/' in l]
+#now grab the sepcific html
+
+data = requests.get(f"https://fbref.com{links[0]}")
+#this downlaods our data 
+#shows very long string of html
+#can pasrse once again with pandas
+
+shooting = pd.read_html(data.text, match="shooting")[0]
+
+#cleaning and merging scraped data with pandas
+
+print(shooting.head())
+#looks at the first 5 rows
 
 
 
