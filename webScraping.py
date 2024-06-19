@@ -107,6 +107,8 @@ shooting = pd.read_html(data.text, match="shooting")[0]
 
 print(shooting.head())
 #looks at the first 5 rows
+#was not working and now installed html5lib using pip
+#now works 
 
 
 
